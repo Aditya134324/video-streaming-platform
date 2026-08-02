@@ -1,0 +1,129 @@
+.navbar{
+    width:92%;
+    max-width:1400px;
+    margin:25px auto;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:25px;
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(20px);
+    border:1px solid #E8E2FF;
+    border-radius:24px;
+    box-shadow:0 12px 35px rgba(139,108,248,.12);
+}
+.logo{
+    font-size:1.7rem;
+    font-weight:700;
+    color:#7C3AED;
+    cursor:pointer;
+    user-select:none;
+}
+.search-bar{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+.search-bar input{
+    width:100%;
+    max-width:450px;
+    padding:14px 22px;
+    border-radius:50px;
+    border:1px solid #DDD6FE;
+    outline:none;
+    background:#F9F7FF;
+    color:#2F2A44;
+    font-size:.95rem;
+    transition:.3s ease;
+}
+.search-bar input:focus{
+    border-color:#8B6CF8;
+    box-shadow:0 0 12px rgba(139,108,248,.20);
+}
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+.page{
+    text-decoration:none;
+    color:#4C4763;
+    font-weight:500;
+    transition:.3s;
+}
+.page:hover{
+    color:#8B6CF8;
+}
+.button{
+    padding:12px 22px;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+.login-btn{
+    background:#FFFFFF;
+    color:#7C3AED;
+    border:1px solid #DDD6FE;
+}
+.login-btn:hover{
+    background:#F3EEFF;
+}
+.signup-btn{
+    background:linear-gradient(135deg,#B69CFF,#8B6CF8);
+    color:#FFFFFF;
+}
+.signup-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(139,108,248,.30);
+}
+.logout-btn{
+    background:#FFEEEE;
+    color:#D43F5E;
+}
+.logout-btn:hover{
+    background:#FFDCDC;
+}
+.profile-link{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.nav-avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #8B6CF8;
+    cursor:pointer;
+    transition:.3s ease;
+    box-shadow:0 8px 18px rgba(139,108,248,.20);
+}
+.nav-avatar:hover{
+    transform:scale(1.08);
+    border-color:#A855F7;
+    box-shadow:0 10px 25px rgba(139,108,248,.35);
+}
+@media(max-width:950px){
+    .navbar{
+        flex-direction:column;
+        gap:20px;
+        padding:20px;
+    }
+    .search-bar{
+        width:100%;
+    }
+    .search-bar input{
+        max-width:100%;
+    }
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+    .nav-avatar{
+        width:44px;
+        height:44px;
+    }
+}
