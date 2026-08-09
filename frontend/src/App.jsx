@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar.jsx";
 import WatchVideo from "./pages/WatchVideo.jsx";
 import UploadVideo from "./pages/uploadVideo.jsx";
 import Profile from "./pages/Profile.jsx";
+import Search from "./pages/searchPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App(){
@@ -17,6 +18,7 @@ function App(){
 
      <Routes>
       <Route path="/" element={<Home/>}/>
+      <Route path="/search" element={<Search />}/>
       <Route path="/video/:id" element={<WatchVideo />} />
        <Route path="/upload" element={<ProtectedRoute> <UploadVideo /> </ProtectedRoute>} />
        <Route path="/profile" element={<ProtectedRoute> <Profile /> </ProtectedRoute>} />
