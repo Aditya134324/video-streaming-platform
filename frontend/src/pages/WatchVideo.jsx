@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getVideoById, getVideoComments, addComment, updateComment, deleteComment, getUserProfile } from "../services/api";
+import { getVideoById, getVideoComments, addComment, deleteComment, getUserProfile } from "../services/api";
 import "../styles/WatchVideo.css"
 
 const WatchVideo = () => {
@@ -9,8 +9,6 @@ const WatchVideo = () => {
     const [video, setVideo] = useState(null);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
-    const [editingCommentId, setEditingCommentId] = useState(null);
-    const [editedContent, setEditedContent] = useState("");
     const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
@@ -29,8 +27,8 @@ const WatchVideo = () => {
                 const data = await getVideoById(id);
                 setVideo(data.video);
             } catch (error) {
-                console.log(error)
-            }s
+                console.log(error);
+            }
         };
 
         const fetchCurrentUser = async () => {
@@ -78,47 +76,6 @@ const WatchVideo = () => {
         }
     };
 
-    const handleEdit = (comment) => {
-        setEditingCommentId(comment._id);
-        setEditedContent(comment.content);
-    };
-
-    const handleUpdateComment = async (commentId) => {
-
-        if (!editedContent.trim()) {
-            return;
-        }
-
-        try {
-            const token = localStorage.getItem("token");
-
-            const data = await updateComment(
-                commentId,
-                { content: editedContent },
-                token
-            );
-
-            setComments((prevComments) =>
-                prevComments.map((comment) =>
-                    comment._id === commentId
-                        ? { ...comment, content: data.comment?.content || editedContent }
-                        : comment
-                )
-            );
-
-            setEditingCommentId(null);
-            setEditedContent("");
-
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const handleCancelEdit = () => {
-        setEditingCommentId(null);
-        setEditedContent("");
-    };
-
     const handleDeleteComment = async (commentId) => {
 
         try {
@@ -144,83 +101,63 @@ const WatchVideo = () => {
     }
 
     return (
-    <div className="watch-video">
-        <div className="video-player">
-            <video src={video.videoUrl} controls />
-        </div>
-        <div className="video-details">
+        <div className="watch-video">
 
-            <h1>{video.title}</h1>
-
-            <div className="video-owner">
-                <img src={video.owner?.avatar} alt={video.owner?.username} className="owner-avatar" />
-
-                <div className="owner-details">
-
-                    <h3>{video.owner?.username}</h3>
-                    <p>{video.views} views</p>
-
-                </div>
+            <div className="video-player">
+                <video src={video.videoUrl} controls />
             </div>
 
-            <p className="video-description"> {video.description} </p>
+            <div className="video-details">
 
-        </div>
-        <div className="comments-section">
-            <h2>Comments</h2>
+                <h1>{video.title}</h1>
+                <div className="video-owner">
+                    <img src={video.owner?.avatar} alt={video.owner?.username} className="owner-avatar"/>
 
-            <form className="comment-form" onSubmit={handleAddComment}>
-
-                <input
-                    type="text"
-                    placeholder="Add a comment..."
-                    value={newComment}
-                    onChange={(e)=>setNewComment(e.target.value)}
-                />
-
-                <button type="submit">
-                    Comment
-                </button>
-
-            </form>
-
-            {comments.length>0 ? (
-                comments.map((comment)=>(
-                    <div className="comment-card" key={comment._id}>
-                        <div className="comment-header">
-                            <img src={comment.owner?.avatar} alt={comment.owner?.username} className="comment-avatar" />
-                            <div className="comment-info">
-                                <h4>{comment.owner?.username}</h4>
-                                <p>{comment.content}</p>
-                            </div>
-                        </div>
-                        {editingCommentId===comment._id ? (
-
-                            <div className="edit-comment">
-                                <input type="text" value={editedContent} onChange={(e)=>setEditedContent(e.target.value)} />
-                                <button type="button" onClick={()=>handleUpdateComment(comment._id)}> Save </button>
-                                <button type="button" onClick={handleCancelEdit}>Cancel</button>
-                            </div>
-                        ) : (
-                            currentUser && comment.owner?._id===currentUser._id && (
-                                <div className="comment-buttons">
-                                    <button type="button" onClick={()=>handleEdit(comment)}>
-                                        Edit
-                                    </button>
-                                    <button type="button" onClick={()=>handleDeleteComment(comment._id)}>
-                                        Delete
-                                    </button>
-                                </div>
-                            )
-                        )}
+                    <div className="owner-details">
+                        <h3>{video.owner?.username}</h3>
+                        <p>{video.views} views</p>
                     </div>
-                ))
-            ) : (
-            <p>No comments yet.</p>
-            )}
+                </div>
+
+                <p className="video-description">{video.description}</p>
+
+            </div>
+
+            <div className="comments-section">
+
+                <h2>Comments</h2>
+
+                <form className="comment-form" onSubmit={handleAddComment}>
+                 <input type="text" placeholder="Add a comment..." value={newComment} onChange={(e) => setNewComment(e.target.value)}/>
+                  <button type="submit">Comment</button>
+                </form>
+
+                {comments.length > 0 ? (
+                    comments.map((comment) => (
+                        <div className="comment-card" key={comment._id}>
+                            <div className="comment-header">
+                                <img src={comment.owner?.avatar} alt={comment.owner?.username} className="comment-avatar"/>
+
+                                <div className="comment-info">
+                                    <h4>{comment.owner?.username}</h4>
+                                    <p>{comment.content}</p>
+                                </div>
+                            </div>
+
+                            {currentUser && comment.owner?._id === currentUser._id && (
+
+                                <div className="comment-buttons">
+                                    <button type="button" onClick={() => handleDeleteComment(comment._id)}>Delete</button>
+                                </div>
+                            )}
+                        </div>
+                    ))
+                ) : (
+                    <p>No comments yet.</p>
+                )}
+            </div>
         </div>
-    </div>
-);
+    );
 };
 
 export default WatchVideo;

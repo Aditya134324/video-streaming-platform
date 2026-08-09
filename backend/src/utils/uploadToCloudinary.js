@@ -11,7 +11,6 @@ const uploadToCloudinary = async (filePath, folder)=>{
 
         return result;
     }
-
     catch(error){
         if(fs.existsSync(filePath)){
             fs.unlinkSync(filePath);
