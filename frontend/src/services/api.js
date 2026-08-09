@@ -155,3 +155,13 @@ export const deleteVideo = async (videoId, token) => {
     });
     return res.json();
 };
+export const likeVideo = async (videoId, token) => {
+    const res = await fetch(`${API_URL}/videos/${videoId}/like`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    return res.json();
+};

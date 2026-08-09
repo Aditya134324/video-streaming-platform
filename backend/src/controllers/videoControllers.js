@@ -234,3 +234,43 @@ export const searchVideos = async (req,res)=>{
         });
     }
 };
+export const likeVideo = async (req,res)=>{
+    try{
+        const {id} = req.params;
+        const userId = req.user.id;
+
+        const video = await Video.findById(id);
+
+        if(!video){
+            return res.status(404).json({
+                message:"Video not found"
+            });
+        }
+
+        const alreadyLiked = video.likes.includes(userId);
+
+        if(alreadyLiked){
+            video.likes = video.likes.filter(
+                (user)=>user.toString() !== userId
+            );
+        }
+        else{
+            video.likes.push(userId);
+        }
+
+        await video.save();
+
+        return res.status(200).json({
+            message: alreadyLiked ? "Video unliked" : "Video liked",
+            likes: video.likes.length
+        });
+
+    }catch(error){
+        console.log(error);
+
+        return res.status(500).json({
+            message:"Failed to like video",
+            error:error.message
+        });
+    }
+};
