@@ -100,7 +100,6 @@ export const updateCoverImage = async (file, token) => {
     return res.json();
 };
 
-// ==================== VIDEO APIs ====================
 
 export const uploadVideo = async (data, token) => {
     const res = await fetch(`${API_URL}/videos/upload`, {
@@ -117,6 +116,14 @@ export const getAllVideos = async () => {
     const res = await fetch(`${API_URL}/videos`, {
         method: "GET"
     });
+    return res.json();
+};
+
+export const searchVideos = async (query) => {
+    const res = await fetch(`${API_URL}/videos/search?query=${query}`, {
+        method: 'GET'
+    });
+
     return res.json();
 };
 

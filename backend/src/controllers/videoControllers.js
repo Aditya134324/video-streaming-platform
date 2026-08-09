@@ -203,3 +203,34 @@ export const deleteVideo = async (req, res) => {
         });
     }
 };
+export const searchVideos = async (req,res)=>{
+    try{
+        const {query} = req.query;
+
+        if(!query){
+            return res.status(400).json({
+                message:"Search query is required"
+            });
+        }
+
+        const videos = await Video.find({
+            $or:[
+                {
+                    title:{ $regex:query, $options:"i"}
+                },
+                {
+                    description:{ $regex:query, $options:"i"}
+                }
+            ]
+        }).populate("owner","username avatar");
+        return res.status(200).json({
+            videos
+        });
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            message:"Failed to search videos",
+            error:error.message
+        });
+    }
+};
