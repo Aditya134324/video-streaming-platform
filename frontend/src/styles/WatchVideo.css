@@ -19,6 +19,7 @@ width:100%;
 border-radius:25px;
 }
 .video-details{
+position:relative;
 max-width:1200px;
 margin:30px auto;
 padding:30px;
@@ -159,6 +160,26 @@ transition:.2s;
 }
 .delete-comment:hover{
 background:rgba(255,92,108,.1);
+}
+.like-button{
+position:absolute;
+top:32px;
+right:30px;
+display:flex;
+align-items:center;
+gap:8px;
+padding:10px 18px;
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,.08);
+color:#FFFFFF;
+cursor:pointer;
+font-size:16px;
+transition:.3s;
+}
+.like-button:hover{
+background:rgba(139,92,246,.3);
+transform:translateY(-2px);
 }
 @media(max-width:768px){
 .watch-video{

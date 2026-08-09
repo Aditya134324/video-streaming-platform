@@ -130,7 +130,7 @@ return (
                 <div className="owner-details">
                     <h3>{video.owner?.username}</h3>
                     <p>{video.views} views</p>
-                    <button onClick={handleLike}><ThumbsUp size={20}/>{likes}</button>
+                    <button className="like-button" onClick={handleLike}><ThumbsUp size={20}/>{likes}</button>
                 </div>
             </div>
 
