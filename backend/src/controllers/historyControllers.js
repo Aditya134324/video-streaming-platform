@@ -1,7 +1,7 @@
-import History from "../models/History";
-import Video from "../models/Video";
+import History from "../models/History.js";
+import Video from "../models/Video.js";
 
-const addToHistory = async(req,res)=>{
+export const addToHistory = async(req,res)=>{
    try{
     const {videoId} = req.body;
     const userId = req.user._id;
