@@ -8,6 +8,7 @@ import WatchVideo from "./pages/WatchVideo.jsx";
 import UploadVideo from "./pages/uploadVideo.jsx";
 import Profile from "./pages/Profile.jsx";
 import Search from "./pages/searchPage.jsx";
+import History from "./pages/History.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App(){
@@ -22,9 +23,10 @@ function App(){
       <Route path="/video/:id" element={<WatchVideo />} />
        <Route path="/upload" element={<ProtectedRoute> <UploadVideo /> </ProtectedRoute>} />
        <Route path="/profile" element={<ProtectedRoute> <Profile /> </ProtectedRoute>} />
+       <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
-     </Routes>
+     </Routes>s
      </>
   );
 }
