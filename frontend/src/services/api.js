@@ -145,6 +145,7 @@ export const updateVideo = async (videoId, data, token) => {
     });
     return res.json();
 };
+
 export const likeVideo = async (videoId, token) => {
     const res = await fetch(`${API_URL}/videos/${videoId}/like`, {
         method: "POST",
@@ -153,5 +154,24 @@ export const likeVideo = async (videoId, token) => {
         }
     });
 
+    return res.json();
+};
+
+export const addToHistory = async(videoId,token)=>{
+    const res=await fetch(`${API_URL}/history/${videoId}`,{
+        method:"POST",
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    });
+    return res.json();
+};
+
+export const getHistory = async(token)=>{
+    const res=await fetch(`${API_URL}/history`,{
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    });
     return res.json();
 };
