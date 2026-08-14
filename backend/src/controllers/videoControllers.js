@@ -207,15 +207,19 @@ export const searchVideos = async (req,res)=>{
         });
     }
 };
-export const likeVideo = async (req,res)=>{
+export const likeVideo = async(req,res)=>{
 try{
-    const {id}=req.params;
-
-    const video=await Video.findById(id);
+    const video = await Video.findById(req.params.id);
 
     if(!video){
         return res.status(404).json({
             message:"Video not found"
+        });
+    }
+
+    if(video.likes.includes(req.user.id)){
+        return res.status(400).json({
+            message:"Already liked"
         });
     }
 
@@ -230,8 +234,7 @@ try{
 
 }catch(error){
     res.status(500).json({
-        message:"Failed to like video",
-        error:error.message
+        message:"Failed to like video"
     });
 }
 };
