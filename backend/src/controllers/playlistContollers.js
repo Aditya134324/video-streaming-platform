@@ -1,10 +1,10 @@
-import Playlist from "../models/Playlist";
-import Video from "../models/Video";
+import Playlist from "../models/Playlist.js";
+import Video from "../models/Video.js";
 
 export const createPlaylist = async (req, res) =>{
     try{
     const {name} = req.body;
-    const owner = req.user._id;
+    const owner = req.user.id;
 
     if(!name){
         return res.status(400).json({
@@ -16,6 +16,8 @@ export const createPlaylist = async (req, res) =>{
         name,
         owner
     })
+
+    await playlist.save();
     res.status(201).json({
         message: "Playlist created successfully",
         playlist
@@ -115,7 +117,7 @@ export const addVideoToPlaylist = async(req,res)=>{
     }
 }
 
-export const removeVideoFromPLaylist = async(req,res)=>{
+export const removeVideoFromPlaylist = async(req,res)=>{
     try{
         const {id,videoId} = req.params;
         const playlist = await Playlist.findOne({
