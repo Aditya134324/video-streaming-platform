@@ -1,4 +1,7 @@
 const API_URL = "http://localhost:5000/api";
+
+// ---------authentication----------
+
 export const signup = async (data) => {
     const res = await fetch(`${API_URL}/auth/signup`, {
         method: "POST",
@@ -20,6 +23,8 @@ export const login = async (data) => {
     });
     return res.json();
 };
+
+// ---------comments----------
 
 export const addComment = async (videoId, data, token) => {
     const res = await fetch(`${API_URL}/comments/${videoId}`, {
@@ -49,6 +54,8 @@ export const deleteComment = async (commentId, token) => {
     });
     return res.json();
 };
+
+// ---------user profile----------
 
 export const getUserProfile = async (token) => {
     const res = await fetch(`${API_URL}/user/profile`, {
@@ -100,6 +107,7 @@ export const updateCoverImage = async (file, token) => {
     return res.json();
 };
 
+// ---------videos----------
 
 export const uploadVideo = async (data, token) => {
     const res = await fetch(`${API_URL}/videos/upload`, {
@@ -157,6 +165,8 @@ export const likeVideo = async (videoId, token) => {
     return res.json();
 };
 
+// ---------history----------
+
 export const addToHistory = async(videoId,token)=>{
     const res=await fetch(`${API_URL}/history/${videoId}`,{
         method:"POST",
@@ -169,6 +179,68 @@ export const addToHistory = async(videoId,token)=>{
 
 export const getHistory = async(token)=>{
     const res=await fetch(`${API_URL}/history`,{
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    });
+    return res.json();
+};
+
+// ---------playlists----------
+
+export const createPlaylist = async(name,token)=>{
+    const res=await fetch(`${API_URL}/playlists`,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json",
+            Authorization:`Bearer ${token}`
+        },
+        body:JSON.stringify({name})
+    });
+    return res.json();
+};
+
+export const getPlaylists = async(token)=>{
+    const res=await fetch(`${API_URL}/playlists`,{
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    });
+    return res.json();
+};
+
+export const getPlaylistById = async(id,token)=>{
+    const res=await fetch(`${API_URL}/playlists/${id}`,{
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    });
+    return res.json();
+};
+
+export const addVideoToPlaylist = async(playlistId,videoId,token)=>{
+    const res=await fetch(`${API_URL}/playlists/${playlistId}/videos/${videoId}`,{
+        method:"POST",
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    });
+    return res.json();
+};
+
+export const removeVideoFromPlaylist = async(playlistId,videoId,token)=>{
+    const res=await fetch(`${API_URL}/playlists/${playlistId}/videos/${videoId}`,{
+        method:"DELETE",
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    });
+    return res.json();
+};
+
+export const deletePlaylist = async(id,token)=>{
+    const res=await fetch(`${API_URL}/playlists/${id}`,{
+        method:"DELETE",
         headers:{
             Authorization:`Bearer ${token}`
         }

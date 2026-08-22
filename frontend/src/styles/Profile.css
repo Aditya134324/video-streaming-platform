@@ -1,90 +1,177 @@
-.profile-page {
-	width: 100%;
-	min-height: 100vh;
-	padding: 40px 6% 70px;
-}
+.profile-page { 
+	width: 100%; 
+	min-height: 100vh; 
+	padding: 40px 6% 70px; 
+} 
+ 
+.profile-banner { 
+	width: 100%; 
+	height: 300px; 
+	border-radius: 20px; 
+	overflow: hidden; 
+	background: #101017; 
+	border: 1px solid var(--border); 
+	position: relative; 
+} 
+ 
+.cover-img { 
+	width: 100%; 
+	height: 100%; 
+	object-fit: cover; 
+} 
+ 
+.cover-placeholder { 
+	width: 100%; 
+	height: 100%; 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+	color: #777682; 
+	background: linear-gradient(135deg, #11111a, #1b1730); 
+	font-size: 1rem; 
+} 
+ 
+.profile-card { 
+	width: 100%; 
+	max-width: 900px; 
+	margin: -70px auto 25px; 
+	background: #101017; 
+	border: 1px solid var(--border); 
+	border-radius: 20px; 
+	padding: 90px 38px 34px; 
+	position: relative; 
+	text-align: center; 
+	box-shadow: var(--shadow); 
+} 
+ 
+.avatar-section { 
+	position: absolute; 
+	top: -65px; 
+	left: 50%; 
+	transform: translateX(-50%); 
+} 
+ 
+.avatar-img, 
+.avatar-placeholder { 
+	width: 130px; 
+	height: 130px; 
+	border-radius: 50%; 
+	border: 5px solid #101017; 
+	object-fit: cover; 
+	background: #20202a; 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+	color: #fff; 
+	font-weight: 600; 
+} 
+ 
+.profile-title { 
+	font-size: 1.8rem; 
+	color: #fff; 
+	margin-bottom: 7px; 
+} 
+ 
+.profile-email { 
+	color: #888793; 
+	margin-bottom: 28px; 
+} 
+ 
+.profile-form { 
+	display: flex; 
+	flex-direction: column; 
+	gap: 13px; 
+	text-align: left; 
+} 
+ 
+.profile-input { 
+	padding: 14px 16px; 
+	border-radius: 11px; 
+	border: 1px solid var(--border); 
+	background: #17171f; 
+	color: #fff; 
+} 
+ 
+.profile-input:focus { 
+	border-color: rgba(139, 92, 246, 0.6); 
+	box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.07); 
+} 
+ 
+.profile-button { 
+	padding: 13px 18px; 
+	border-radius: 11px; 
+	background: var(--primary); 
+	color: #fff; 
+	font-size: 0.92rem; 
+	font-weight: 600; 
+} 
+ 
+.profile-button:hover { 
+	background: var(--primary-hover); 
+	transform: translateY(-1px); 
+} 
+ 
+.upload-card { 
+	width: 100%; 
+	max-width: 900px; 
+	margin: 16px auto; 
+	background: #101017; 
+	border: 1px solid var(--border); 
+	border-radius: 16px; 
+	padding: 24px; 
+} 
+ 
+.upload-card h3 { 
+	color: #fff; 
+	margin-bottom: 16px; 
+	font-size: 1rem; 
+} 
+ 
+.profile-file { 
+	width: 100%; 
+	margin-bottom: 15px; 
+	color: #a5a4af; 
+} 
+ 
+.profile-file::file-selector-button { 
+	background: #1d1d27; 
+	color: #fff; 
+	border: 1px solid var(--border); 
+	padding: 9px 14px; 
+	border-radius: 9px; 
+	cursor: pointer; 
+	margin-right: 12px; 
+} 
+ 
+.profile-file::file-selector-button:hover { 
+	background: #292934; 
+} 
 
-.profile-banner {
-	width: 100%;
-	height: 300px;
-	border-radius: 20px;
-	overflow: hidden;
-	background: #101017;
-	border: 1px solid var(--border);
-	position: relative;
-}
-
-.cover-img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.cover-placeholder {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #777682;
-	background: linear-gradient(135deg, #11111a, #1b1730);
-	font-size: 1rem;
-}
-
-.profile-card {
+.playlist-section {
 	width: 100%;
 	max-width: 900px;
-	margin: -70px auto 25px;
+	margin: 25px auto;
 	background: #101017;
 	border: 1px solid var(--border);
 	border-radius: 20px;
-	padding: 90px 38px 34px;
-	position: relative;
-	text-align: center;
+	padding: 30px;
 	box-shadow: var(--shadow);
 }
 
-.avatar-section {
-	position: absolute;
-	top: -65px;
-	left: 50%;
-	transform: translateX(-50%);
-}
-
-.avatar-img,
-.avatar-placeholder {
-	width: 130px;
-	height: 130px;
-	border-radius: 50%;
-	border: 5px solid #101017;
-	object-fit: cover;
-	background: #20202a;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.playlist-section h2 {
 	color: #fff;
-	font-weight: 600;
+	font-size: 1.6rem;
+	margin-bottom: 20px;
 }
 
-.profile-title {
-	font-size: 1.8rem;
-	color: #fff;
-	margin-bottom: 7px;
-}
-
-.profile-email {
-	color: #888793;
-	margin-bottom: 28px;
-}
-
-.profile-form {
+.playlist-form {
 	display: flex;
-	flex-direction: column;
 	gap: 13px;
-	text-align: left;
+	margin-bottom: 25px;
 }
 
-.profile-input {
+.playlist-form input {
+	flex: 1;
 	padding: 14px 16px;
 	border-radius: 11px;
 	border: 1px solid var(--border);
@@ -92,90 +179,120 @@
 	color: #fff;
 }
 
-.profile-input:focus {
+.playlist-form input:focus {
+	outline: none;
 	border-color: rgba(139, 92, 246, 0.6);
 	box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.07);
 }
 
-.profile-button {
+.playlist-form button {
 	padding: 13px 18px;
+	border: none;
 	border-radius: 11px;
 	background: var(--primary);
 	color: #fff;
 	font-size: 0.92rem;
 	font-weight: 600;
+	cursor: pointer;
 }
 
-.profile-button:hover {
+.playlist-form button:hover {
 	background: var(--primary-hover);
 	transform: translateY(-1px);
 }
 
-.upload-card {
-	width: 100%;
-	max-width: 900px;
-	margin: 16px auto;
-	background: #101017;
+.playlist-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+}
+
+.playlist-card {
+	background: #17171f;
 	border: 1px solid var(--border);
-	border-radius: 16px;
-	padding: 24px;
+	border-radius: 15px;
+	padding: 20px;
+	transition: 0.3s;
 }
 
-.upload-card h3 {
-	color: #fff;
-	margin-bottom: 16px;
-	font-size: 1rem;
+.playlist-card:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--shadow);
 }
 
-.profile-file {
-	width: 100%;
-	margin-bottom: 15px;
-	color: #a5a4af;
-}
-
-.profile-file::file-selector-button {
-	background: #1d1d27;
-	color: #fff;
-	border: 1px solid var(--border);
-	padding: 9px 14px;
-	border-radius: 9px;
+.playlist-card-content {
 	cursor: pointer;
-	margin-right: 12px;
 }
 
-.profile-file::file-selector-button:hover {
-	background: #292934;
+.playlist-card h3 {
+	color: #fff;
+	margin-bottom: 8px;
 }
 
-@media (max-width: 768px) {
-	.profile-page {
-		padding: 25px 18px 50px;
-	}
+.playlist-card p {
+	color: #888793;
+	margin: 0;
+}
 
-	.profile-banner {
-		height: 200px;
-	}
+.playlist-delete-button {
+	margin-top: 15px;
+	padding: 9px 14px;
+	border: 1px solid rgba(255, 92, 108, 0.2);
+	border-radius: 9px;
+	background: rgba(255, 92, 108, 0.08);
+	color: #ff5c6c;
+	cursor: pointer;
+}
 
-	.profile-card {
-		margin-top: -55px;
-		padding: 78px 20px 25px;
-	}
+.playlist-delete-button:hover {
+	background: rgba(255, 92, 108, 0.16);
+}
 
-	.avatar-img,
-	.avatar-placeholder {
-		width: 105px;
-		height: 105px;
-	}
+@media (max-width: 768px) { 
+	.profile-page { 
+		padding: 25px 18px 50px; 
+	} 
+ 
+	.profile-banner { 
+		height: 200px; 
+	} 
+ 
+	.profile-card { 
+		margin-top: -55px; 
+		padding: 78px 20px 25px; 
+	} 
+ 
+	.avatar-img, 
+	.avatar-placeholder { 
+		width: 105px; 
+		height: 105px; 
+	} 
+ 
+	.avatar-section { 
+		top: -53px; 
+	} 
+ 
+	.profile-title { 
+		font-size: 1.45rem; 
+	} 
+ 
+	.upload-card { 
+		padding: 20px; 
+	} 
 
-	.avatar-section {
-		top: -53px;
-	}
-
-	.profile-title {
-		font-size: 1.45rem;
-	}
-
-	.upload-card {
+	.playlist-section {
 		padding: 20px;
+	}
+
+	.playlist-form {
+		flex-direction: column;
+	}
+
+	.playlist-form button {
+		width: 100%;
+	}
+
+	.playlist-grid {
+		grid-template-columns: 1fr;
 	}
 }

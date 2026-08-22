@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
-import { getUserProfile, updateUserProfile, updateAvatar, updateCoverImage,} from "../services/api";
+import { useNavigate } from "react-router-dom";
+import { getUserProfile, updateUserProfile, updateAvatar, updateCoverImage, getPlaylists, createPlaylist, deletePlaylist,} from "../services/api";
 import "../styles/Profile.css";
 
 const Profile = () => {
+    const navigate = useNavigate();
     const [profile, setProfile] = useState(null);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [avatar, setAvatar] = useState(null);
     const [coverImage, setCoverImage] = useState(null);
+    const [playlists, setPlaylists] = useState([]);
+    const [playlistName, setPlaylistName] = useState("");
 
     const fetchProfile = async () => {
         try {
@@ -26,9 +30,57 @@ const Profile = () => {
         }
     };
 
+    const fetchPlaylists = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const data = await getPlaylists(token);
+            setPlaylists(data.playlists || []);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
         fetchProfile();
+        fetchPlaylists();
     }, []);
+
+    const handleCreatePlaylist = async (e) => {
+        e.preventDefault();
+
+        if (!playlistName.trim()) {
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+            const data = await createPlaylist(playlistName, token);
+
+            if (data.playlist) {
+                setPlaylists((prev) => [...prev, data.playlist]);
+                setPlaylistName("");
+            } else {
+                alert(data.message || "Failed to create playlist");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Failed to create playlist");
+        }
+    };
+
+    const handleDeletePlaylist = async (id) => {
+        try {
+            const token = localStorage.getItem("token");
+            const data = await deletePlaylist(id, token);
+
+            if (data.message) {
+                setPlaylists((prev) => prev.filter((playlist) => playlist._id !== id));
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Failed to delete playlist");
+        }
+    };
 
     const handleUpdateProfile = async () => {
         try {
@@ -175,6 +227,40 @@ const Profile = () => {
             <button className="profile-button" onClick={handleCoverUpload}>
                 Upload Cover Image
             </button>
+
+        </div>
+
+        <div className="playlist-section">
+
+            <h2>My Playlists</h2>
+
+            <form className="playlist-form" onSubmit={handleCreatePlaylist}>
+                <input type="text" placeholder="Create a playlist..." value={playlistName} onChange={(e)=>setPlaylistName(e.target.value)} />
+                <button type="submit">Create Playlist</button>
+            </form>
+
+            <div className="playlist-grid">
+
+                {playlists.length > 0 ? (
+                    playlists.map((playlist)=>(
+                        <div className="playlist-card" key={playlist._id}>
+
+                            <div className="playlist-card-content" onClick={()=>navigate(`/playlist/${playlist._id}`)}>
+                                <h3>{playlist.name}</h3>
+                                <p>{playlist.videos?.length || 0} videos</p>
+                            </div>
+
+                            <button className="playlist-delete-button" onClick={()=>handleDeletePlaylist(playlist._id)}>
+                                Delete
+                            </button>
+
+                        </div>
+                    ))
+                ) : (
+                    <p>No playlists yet.</p>
+                )}
+
+            </div>
 
         </div>
 

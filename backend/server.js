@@ -8,6 +8,7 @@ import userProfileRoutes from "./src/routes/userProfile.js";
 import videoRoutes from "./src/routes/videoRoute.js";
 import commentRoutes from "./src/routes/commentRoutes.js"
 import historyRoutes from "./src/routes/historyRoutes.js";
+import playlistRoutes from "./src/routes/playlistRoutes.js";
 
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use("/api/user",userProfileRoutes);
 app.use("/api/videos", videoRoutes);
 app.use("/api/comments",commentRoutes);
 app.use("/api/history",historyRoutes);
+app.use("/api/playlists",playlistRoutes);
 
 const PORT = process.env.PORT || 5000;
 
